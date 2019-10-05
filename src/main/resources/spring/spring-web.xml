@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+	<!-- 配置SpringMVC -->
+	<!-- 1.开启SpringMVC注解模式 （自动识别controller类，不需要在xml里面做bean的配置）-->
+	<!-- 简化配置： (1)自动注册DefaultAnootationHandlerMapping,AnotationMethodHandlerAdapter 
+		(2)提供一些列：数据绑定，数字和日期的format @NumberFormat, @DateTimeFormat, xml,json默认读写支持 -->
+
+	<!-- 扩充了注解驱动，可以将请求参数绑定到控制器参数 -->
+	<mvc:annotation-driven />
+	<!--
+	 2.静态资源默认servlet配置 
+	(1)加入对静态资源的处理：js,gif,png 
+	(2)允许使用"/"做整体映射
+	通俗来讲就是告诉springmvc的核心类dispacther-servlet不要拦截以resources开头的所有请求路径，并且将他们当做静态资源交由servlet去处理，也就是webapp/resources
+	的js等文件不要用dispacther-servlet去拦截，而交由默认的servlet去处理<mvc:default-servlet-handler />
+	 -->
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+	<mvc:default-servlet-handler />
+
+	<!-- 3.定义视图解析器 -->
+	<!-- 可以拦截所在路径下以.html结尾的文件 -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/html/"></property><!-- 前缀 -->
+		<property name="suffix" value=".html"></property><!-- 后缀 -->
+	</bean>
+	<!-- 文件上传解析器 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="utf-8"></property>
+		<!-- 文件上传的最大尺寸:单位是字节 1024*1024*20二十兆-->
+		<property name="maxUploadSize" value="20971520"></property>
+		<!-- 最大内存 -->
+		<property name="maxInMemorySize" value="20971520"></property>
+	</bean>
+	
+	
+	  
+	
+	<!-- 4.扫描web相关的bean -->
+	<context:component-scan base-package="com.android.location.controller" />
+	
+</beans>

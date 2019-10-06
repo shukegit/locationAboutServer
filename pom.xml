@@ -114,7 +114,7 @@
 		<dependency>
 			<groupId>com.mchange</groupId>
 			<artifactId>c3p0</artifactId>
-			<version>0.9.5.2</version>
+			<version>0.9.5.4</version>
 		</dependency>
 		<!-- c3p0数据库连接池的辅助包,没有这个包系统启动的时候会报classnotfoundexception -->
 		<dependency>

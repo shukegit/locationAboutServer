@@ -74,4 +74,14 @@ public class HttpServletRequestUtil {
 	    }
 	    return null;
 	}
+	
+	public static String getHeader(HttpServletRequest request, String key) {
+		try {
+			String header = String.valueOf(request.getHeader(key));
+			return header;
+		} catch (Exception e) {
+			return null;
+		}
+		
+	}
 }

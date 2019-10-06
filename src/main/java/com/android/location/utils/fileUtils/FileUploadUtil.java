@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,6 +14,8 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 
 public class FileUploadUtil {
+	
+	private static final String fileName = "headPic";
 
 	/**
 	 * 将前端传递过来的CommonsMultipartFile转换为后台可以提交的File类型
@@ -27,7 +30,7 @@ public class FileUploadUtil {
 		if(resolver.isMultipart(request)) {
 //			StandardMultipartHttpServletRequest multipartHttpServletRequest = (StandardMultipartHttpServletRequest)request;
 			MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
-			multipartFile = (MultipartFile)multipartHttpServletRequest.getFile("seafile");
+			multipartFile = (MultipartFile)multipartHttpServletRequest.getFile(fileName);
 		} else {
 			return null;//处理失败返回null
 		}
@@ -52,9 +55,9 @@ public class FileUploadUtil {
 		return file;
 	}
 	
-	public static String saveFileAndGetDir(File file, String sessionStr) {
+	public static String saveFileAndGetDir(File file, String tokenStringDir) throws RuntimeException{
 		
-		String relativePath = PathUtil.getRelativeImagePath(sessionStr);
+		String relativePath = PathUtil.getRelativeImagePath(tokenStringDir);
 		String finalPath = ImageUtil.generateThumbnail(file, relativePath, false);
 		return finalPath;
 	}

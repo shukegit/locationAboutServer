@@ -39,4 +39,63 @@
     phone_number, createTime
     from tb_userinfo
   </select>
+  
+  
+  <select id="selecTbUserInfo" resultMap="BaseResultMap">
+  	SELECT 
+  	user_id, 
+  	token, 
+  	username, 
+  	password, 
+  	realName, 
+  	head_photo_addr, 
+  	isTeacher,
+    phone_number, 
+    createTime
+    FROM 
+    tb_userinfo
+    WHERE
+    username=#{username}
+    AND
+    password=#{password}
+  </select>
+  
+  <select id="selecTbUserInfoByToken" resultMap="BaseResultMap">
+  	SELECT 
+  	user_id, 
+  	token, 
+  	username, 
+  	password, 
+  	realName, 
+  	head_photo_addr, 
+  	isTeacher,
+    phone_number, 
+    createTime
+    FROM 
+    tb_userinfo
+    WHERE
+    token=#{token}
+  </select>
+  
+  <update id="updateUserInfo" parameterType="com.android.location.pojo.TbUserinfo">
+  	UPDATE
+  	tb_userinfo
+  	<set>
+		<if test="username != null">username=#{username},</if>
+		<if test="password != null">password=#{password},</if>
+		<if test="realname != null">realname=#{realName},</if>
+		<if test="headPhotoAddr != null">head_photo_addr=#{headPhotoAddr},</if>
+		<if test="isteacher != null">isTeacher=#{isteacher},</if>
+		<if test="phoneNumber != null">phone_number=#{phoneNumber},</if>
+	</set>
+	WHERE
+	token=#{token}
+  </update>
+  
+  
+  
+  
+  
+  
+  
 </mapper>

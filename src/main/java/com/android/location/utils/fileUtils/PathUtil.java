@@ -36,8 +36,8 @@ public class PathUtil {
 	 * 不同用户图片的子路径upload/item/headImg
 	 */
 	
-	public static String getRelativeImagePath(String sessionStr) {
-		String imagePath = relativePath + sessionStr + "/";
+	public static String getRelativeImagePath(String tokenStringDir) {
+		String imagePath = relativePath + tokenStringDir + "/";
 		return imagePath.replace("/", seperator);
 	}
 	

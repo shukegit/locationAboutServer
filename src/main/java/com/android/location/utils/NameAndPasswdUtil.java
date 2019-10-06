@@ -12,7 +12,7 @@ import com.android.location.response.ServiceResponse;
  */
 public class NameAndPasswdUtil {
 
-	public static ServiceResponse<Map<String, String>> checkNameAndPasswd(String name, String password){
+	public static ServiceResponse<String> checkNameAndPasswd(String name, String password){
 		
 		char[] names = name.toCharArray();
 		char[] passwords = password.toCharArray();
@@ -44,28 +44,6 @@ public class NameAndPasswdUtil {
 	
 	public static String transformName(String username) {
 		
-		return username + AddToName.END.getDesc();
-	}
-
-	private enum AddToName {
-		END(0, "@seafile.henu.com");
-		
-		private final int code;
-		private final String desc;
-		
-		private AddToName(int code, String desc) {
-			this.code = code;
-			this.desc = desc;
-		}
-
-		@SuppressWarnings("unused")
-		public int getCode() {
-			return code;
-		}
-
-		public String getDesc() {
-			return desc;
-		}
-		
+		return username;
 	}
 }

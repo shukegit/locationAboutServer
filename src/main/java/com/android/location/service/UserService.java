@@ -1,5 +1,6 @@
 package com.android.location.service;
 
+import java.io.File;
 import java.util.List;
 
 import com.android.location.pojo.TbUserinfo;
@@ -11,11 +12,13 @@ public interface UserService {
 	
 	ServiceResponse<String> register(String username, String password);
 	
-	ServiceResponse<String> editUserInfo(String token);
+	ServiceResponse<String> editUserInfo(TbUserinfo tbUserinfo);
 	
-	ServiceResponse<List<TbUserinfo>> getUSerInfo(String token);
+	ServiceResponse<String> editUserHeadPic(String token, File file);
 	
-	ServiceResponse<List<TbUserinfo>> getUSersInfo();
+	ServiceResponse<List<TbUserinfo>> getUserInfo(String token);
+	
+	ServiceResponse<List<TbUserinfo>> getUsersInfo();
 	
 	/**
 	 * 通过短信验证码找回密码
